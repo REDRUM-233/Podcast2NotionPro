@@ -64,6 +64,9 @@ class NotionHelper:
         r = self.client.databases.retrieve(database_id=self.episode_database_id)
         for key, value in r.get("properties").items():
             self.property_dict[key] = value
+        self.all_database_id = self.get_relation_database_id(
+            self.property_dict.get("全部")
+        )
         self.day_database_id = self.get_relation_database_id(
             self.property_dict.get("日")
         )
@@ -75,9 +78,6 @@ class NotionHelper:
         )
         self.year_database_id = self.get_relation_database_id(
             self.property_dict.get("年")
-        )
-        self.all_database_id = self.get_relation_database_id(
-            self.property_dict.get("全部")
         )
         if self.day_database_id:
             self.write_database_id(self.day_database_id)
